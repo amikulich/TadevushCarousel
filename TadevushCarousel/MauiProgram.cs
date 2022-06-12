@@ -21,7 +21,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-        string connectionString = "DefaultEndpointsProtocol=https;AccountName=satkarouseldev;AccountKey=WjIdloBbOl9/55wtsJu9gW4LtGRpmDZmHlVZP/YdVjLXcRJwPccTxgdFrm7XPf1Cnqbpxc79KJhL+ASt7esreQ==;EndpointSuffix=core.windows.net";//Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+        string connectionString = Environment.GetEnvironmentVariable("BlobConnectionString");
         
         builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
         
@@ -55,7 +55,7 @@ public static class MauiProgram
                 var tableStorage = new TableServiceClient(
                     new Uri("https://satkarouseldev.table.core.windows.net"),
                     new TableSharedKeyCredential("satkarouseldev",
-                    "WjIdloBbOl9/55wtsJu9gW4LtGRpmDZmHlVZP/YdVjLXcRJwPccTxgdFrm7XPf1Cnqbpxc79KJhL+ASt7esreQ=="));
+                    Environment.GetEnvironmentVariable("StorageAccountToken")));
 
                 var tableClient = tableStorage.GetTableClient("cars");
 
